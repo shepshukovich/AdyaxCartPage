@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
-  entry: './client/components/App.js',
+  entry: './client/components/Landing.jsx',
   output: {
       path: path.resolve(__dirname, 'public'),
       filename: 'bundle.js'
@@ -17,6 +17,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+				test: /\.jsx?$/,
+				loader: "babel-loader",
+				exclude: path.resolve(__dirname, "node_modules")
+			},
       {
         test: /\.(css|scss)$/i,
         use: [
