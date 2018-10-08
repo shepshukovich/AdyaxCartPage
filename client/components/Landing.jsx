@@ -5,7 +5,7 @@ import { styles } from '../../public/style.scss';
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {quantity: 1};
+    this.state = {quantity: 0};
     this.addQuantity = this.addQuantity.bind(this);
   }
 addQuantity() {
@@ -42,9 +42,9 @@ addQuantity() {
             </div>
             <div className='counter-wrapper'>
               <div className='counter'>
-                <input type="button" onClick={this.addQuantity}/>
-                  <p>{this.state.quantity}</p>
                 <input type="button" />
+                  <p>{this.state.quantity}</p>
+                <input type="button" onClick={this.addQuantity} />
               </div>
             </div>
             <div className='remove-wrapper'>
@@ -66,4 +66,5 @@ addQuantity() {
   }
 }
 
-ReactDOM.render(<Cart />, document.getElementById("cart"));
+export { Cart };
+// ReactDOM.render(<Cart />, document.getElementById("cart"));

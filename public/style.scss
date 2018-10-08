@@ -154,14 +154,13 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
 }
 .item {
   width: 959px;
-  height: 194px;
+  min-height: 194px;
   margin: 0 auto;
   margin-bottom: 29px;
   display: flex;
   flex-flow: row nowrap;
 }
 .avatar {
-
   border-radius: 8px;
   margin-left: 10px;
   margin-right: 38px;
@@ -176,8 +175,9 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
 }
 .text-and-select {
   width: 466px;
-  height: 100px;
-  margin-right: 15px;
+  min-height: 100px;
+  box-sizing: border-box;
+  padding-right: 15px;
   border-right: 1px solid rgba(43,46,64, 0.5);
 }
 .text-and-select h1 {
@@ -186,7 +186,7 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
   padding-bottom: 22px;
 }
 .text-and-select p {
-  width: 418px;
+  padding-right: 48px;
   font-family: Work Sans Regular;
   font-size: 16px;
   color: #7D7D7D;
@@ -201,8 +201,8 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin-left: 30px;
-  margin-top: 66px;
+  padding-left: 46px;
+  padding-top: 66px;
 }
 .remove-wrapper {
   height: auto;
@@ -214,13 +214,14 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
   width: 20px;
   height: 23px;
   background: url(images/trash-can.png) no-repeat;
-  margin-left: 46px;
-  margin-bottom: 52px;
+  margin-left: 63px;
+  margin-bottom: 51px;
 }
 .amount p {
   width: auto;
   height: auto;
   padding-bottom: 40px;
+  padding-left: 16px;
   font-weight: bold;
   font-size: 19px;
   font-family: Work Sans Bold;
