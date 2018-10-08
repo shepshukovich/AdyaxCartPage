@@ -1,27 +1,35 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 import { styles } from '../../public/style.scss';
+import { TotalPrice } from './TotalPrice.jsx';
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {quantity: 0};
-    this.addQuantity = this.addQuantity.bind(this);
+    this.state = { quantity: 0 };
+    this.incrementQuantity = this.incrementQuantity.bind(this);
+    this.decrementQuantity = this.decrementQuantity.bind(this);
   }
-addQuantity() {
-  var q = this.state.quantity;
-  var w = q + 1;
-    this.setState = ({
-      quantity: w
-    });
-
-    console.log(w);
-  }
-  componentDidMount(){
-    console.log(this.state.quantity);
-  }
-
+incrementQuantity() {
+  this.setState( function(state) {
+    return {
+      quantity: state.quantity + 1
+    };
+  })
+}
+decrementQuantity() {
+  this.setState( function(state) {
+    if( state.quantity == 0 ) {
+      return {
+        quantity: 0
+      }
+    }
+    return {
+      quantity: state.quantity - 1
+    }
+  })
+}
   render() {
+    const state = this.state;
     return(
     <div className='cart-wrapper'>
       <div className='cart'>
@@ -42,9 +50,9 @@ addQuantity() {
             </div>
             <div className='counter-wrapper'>
               <div className='counter'>
-                <input type="button" />
+                <input type="button" onClick={ this.decrementQuantity } value='-' />
                   <p>{this.state.quantity}</p>
-                <input type="button" onClick={this.addQuantity} />
+                <input type="button" onClick={ this.incrementQuantity }  value='+' />
               </div>
             </div>
             <div className='remove-wrapper'>
@@ -58,8 +66,8 @@ addQuantity() {
           <hr />
         </div>
         <div className='total'>
-          <p>225.00 €</p>
-        </div>
+          <TotalPrice {...state} />
+      </div>
       </div>
     </div>
     )
@@ -67,4 +75,3 @@ addQuantity() {
 }
 
 export { Cart };
-// ReactDOM.render(<Cart />, document.getElementById("cart"));
