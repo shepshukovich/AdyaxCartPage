@@ -1,71 +1,66 @@
 import React from 'react';
 import { styles } from '../../public/style.scss';
 import { TotalPrice } from './TotalPrice.jsx';
-import { Item } from './Item.jsx';
+import { Item } from './item/Item.jsx';
 import  AddItem  from './AddItem/AddItem.jsx';
 import { connect } from 'react-redux';
+import ItemRender from './ItemRender.jsx';
+import $ from "jquery";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { quantity: 0, select: '' };
-    this.incrementQuantity = this.incrementQuantity.bind(this);
-    this.decrementQuantity = this.decrementQuantity.bind(this);
-    this.skuSelector = this.skuSelector.bind(this);
   }
-incrementQuantity() {
-  this.setState( function(state){
-    return {
-      quantity: state.quantity + 1
-    };
+componentDidMount(){
+  $(window).on("load", function() {
+    $('.cost').on('keyup', function(e) {
+      const rgxp = /\D/;
+      const costInput = $('.cost')[0];
+      costInput.value = costInput.value.replace(rgxp, '');
+    });
   })
-}
-decrementQuantity() {
-  this.setState( function(state) {
-    if( state.quantity == 0 ){
-      return {
-        quantity: 0
-      }
-    }
-    return {
-      quantity: state.quantity - 1
-    }
-  })
-}
-skuSelector(e) {
 
-  this.setState( function(state){
-    return {
-      select: e.target.value
-    }
+  $('.ttl').on('keyup', function(e) {
+    const rgxp = /[^a-z]+$/i;
+    let ttl = $('.ttl')[0];
+    ttl.value = ttl.value.replace(rgxp, '');
   })
-  console.log(e.target.value);
 
-}
-componentWillMount() {
-  console.log(this.props.title);
+  $('.desc').on('keyup', function(e) {
+    const rgxp = /[^a-z]+$/i;
+    let ttl = $('.desc')[0];
+    ttl.value = ttl.value.replace(rgxp, '');
+  })
 }
   render() {
     return(
-    <div className='cart-wrapper'>
-      <div className='cart'>
-        <div className='cart-normalizer'>
-          <AddItem />
-          <hr />
-          <Item />
+      <div className='flex-c'>
+        <AddItem />
+        <div className='cart-wrapper'>
+
+          <div className='cart'>
+
+            <div className='cart-normalizer'>
+
+              <ItemRender { ...this.props } />
+            </div>
+            <div className='total'>
+              <TotalPrice { ...this.props } />
+            </div>
+          </div>
         </div>
-        <div className='total'>
-          <TotalPrice {...state} />
       </div>
-      </div>
-    </div>
+
     )
   }
 }
+
 const mapStateToProps = state => ({
 	title: state.addItem.title,
   description: state.addItem.description,
-  cost: state.addItem.cost
+  cost: state.addItem.cost,
+  render: state.addItem.render,
+  selected: state.item.selected
 });
 
 export default connect( mapStateToProps)( Cart );

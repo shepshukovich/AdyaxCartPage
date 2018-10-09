@@ -1,19 +1,22 @@
 import React from 'react';
-import { Item } from '../Item.jsx';
 import { connect } from 'react-redux';
-import { setTitle, setDescription, setCost } from "./action.js";
+import { setTitle, setDescription, setCost, setRenderSequence,
+        remTitle} from "./action.js";
 
 class AddItem extends React.Component {
   constructor(props) {
     super(props)
   }
+
+
+
   render() {
     return(
-        <form onSubmit={ this.props.handleFormSubmit }>
-          <input type="text" placeholder='Enter Title' value={ this.props.title } onKeyUp={this.props.handleTitle} />
-          <input type="text" placeholder='Enter description' value={ this.props.description } onChange={ this.props.handleDescription } />
-          <input type="text" placeholder='Enter cost' value={ this.props.cost } onChange={ this.props.handleCost } />
-          <input type='submit' value='Add Item' />
+        <form onSubmit={ this.props.handleFormSubmit } className='addItem'>
+          <input className='add-item-input ttl' type="text" placeholder='Enter Title' value={ this.props.title } onChange={this.props.handleTitle}  />
+          <input className='add-item-input desc' type="text" placeholder='Enter description' value={ this.props.description } onChange={ this.props.handleDescription } required />
+          <input className='add-item-input cost' type="text" placeholder='Enter cost' value={ this.props.cost } onChange={ this.props.handleCost }   />
+          <input type='button' value='Add Item' onClick={ this.props.handleRender } />
         </form>
     );
   }
@@ -22,7 +25,8 @@ class AddItem extends React.Component {
 const mapStateToProps = state => ({
 	title: state.title,
   description: state.description,
-  cost: state.cost
+  cost: state.cost,
+  render: state.render
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -34,6 +38,13 @@ const mapDispatchToProps = dispatch => ({
   },
   handleCost(event) {
     dispatch(setCost(event.target.value));
+  },
+  handleRender(event) {
+    dispatch(setRenderSequence( event.target.value ));
+    dispatch(setTitle('Title'));
+    dispatch(setDescription('"description"'));
+    dispatch(setCost(25));
+
   }
 });
 

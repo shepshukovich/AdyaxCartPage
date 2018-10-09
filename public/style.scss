@@ -15,6 +15,21 @@ $grey: #4e4e4e;
   padding-top: 53px;
   padding-bottom: 70px;
 }
+.addItem {
+
+  margin: 0 auto;
+  padding-bottom: 90px;
+}
+.add-item-input {
+  padding:15px;
+}
+
+.flex-c {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+}
 .logo {
   width: 245px;
   height: 95px;
@@ -108,7 +123,7 @@ src:  url('fonts/lucidagrande/lucidagrande-webfont.eot?#iefix') format('embedded
       url('fonts/lucidagrande/lucidagrande-webfont.svg#Lucidagrande') format('svg');
 }
 .text {
-  padding-bottom: 133px;
+  padding-bottom: 35px;
 
   h1 {
     font-family: Avalon;
@@ -309,7 +324,7 @@ hr {
 }
 input, textarea, .custom-upload-btn {
     height: 49px;
-    width: 450px;
+    width: calc(100% / 4);
     border: 1px solid #dcdcdc;
     border-radius: 2px;
     font-family: 'Work Sans Regular';
