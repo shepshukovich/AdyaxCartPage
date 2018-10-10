@@ -16,19 +16,37 @@ $grey: #4e4e4e;
   padding-bottom: 70px;
 }
 .addItem {
-
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   margin: 0 auto;
   padding-bottom: 90px;
 }
 .add-item-input {
-  padding:15px;
+  position: relative;
+  padding: 15px;
+  z-index: 1;
+}
+.pseudo {
+
+}
+
+.pseudo::after {
+  content: "Tooltip";
+  position: absolute;
+  bottom: 175px;
+  margin-right:30px;
+  visibility: visible;
+
+}
+.pseudo:hover + .pseudo::after {
+  visibility: hidden;
 }
 
 .flex-c {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-
 }
 .logo {
   width: 245px;
@@ -292,10 +310,38 @@ hr {
   font-family: Work Sans Bold;
 }
 
+#triangle {
+  position: relative;
+  bottom: 25px;
+  z-index: 2;
+  margin-left: 70px;
+  margin-bottom: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 25px 25px 0px 25px;
+  border-color: #75aaff transparent transparent transparent;
+}
 
+.tiptool {
+  height: 0;
+  position: relative;
+  display: flex;
+  flex-flow: column-nowrap;
+}
 
+.tool {
+  background: #75aaff;
+  position: absolute;
+  z-index: 2;
+  bottom: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  line-height: 95px;
+  width: 195px;
+  text-align: center;
 
-
+}
 
 
 
@@ -316,6 +362,35 @@ hr {
     letter-spacing: 2px;
 }
 
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
 .inputs-left {
   width: 450px;
 }
@@ -324,7 +399,7 @@ hr {
 }
 input, textarea, .custom-upload-btn {
     height: 49px;
-    width: calc(100% / 4);
+
     border: 1px solid #dcdcdc;
     border-radius: 2px;
     font-family: 'Work Sans Regular';

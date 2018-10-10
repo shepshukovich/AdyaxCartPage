@@ -37,30 +37,24 @@ componentDidMount(){
       <div className='flex-c'>
         <AddItem />
         <div className='cart-wrapper'>
-
           <div className='cart'>
-
             <div className='cart-normalizer'>
-
-              <ItemRender { ...this.props } />
-            </div>
+              <ItemRender { ...this.props } /></div>
             <div className='total'>
-              <TotalPrice { ...this.props } />
-            </div>
+              <TotalPrice { ...this.props } /></div>
           </div>
         </div>
       </div>
-
     )
   }
 }
 
 const mapStateToProps = state => ({
-	title: state.addItem.title,
+	title:       state.addItem.title,
   description: state.addItem.description,
-  cost: state.addItem.cost,
-  render: state.addItem.render,
-  selected: state.item.selected
+  cost:        state.addItem.cost,
+  render:      state.addItem.render,
+  selected:    state.item.selected
 });
 
 export default connect( mapStateToProps)( Cart );

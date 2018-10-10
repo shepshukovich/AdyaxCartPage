@@ -7,28 +7,20 @@ class TotalPrice extends React.Component {
     this.getTotal = this.getTotal.bind(this);
   }
 
-getTotal() {
-  let a = this.props.render;
-  console.log(a);
-}
-// 225.00 €
-
+  getTotal() {
+    let a = this.props.render;
+    console.log(a);
+  }
 
   render() {
     return(
       <React.Fragment>
-{
-  this.props.render.length ?
-  (<p>
-    {+this.props.render[0].cost + +this.props.selected}
-  </p>
-)
-   :
-    (console.log('No array') )
-}
-
+        { this.props.render.length ?
+          (<p>{ +this.props.render[0].cost + +this.props.selected }</p>)
+          :
+          ( <div></div>)
+        }
       </React.Fragment>
-
     );
   }
 }
