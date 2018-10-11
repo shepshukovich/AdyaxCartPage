@@ -2,7 +2,9 @@ import React from 'react';
 import { TotalPrice } from '../TotalPrice.jsx';
 import { connect } from 'react-redux';
 import $ from "jquery";
-import { setSelect } from './action.js';
+import { setSelect, decrementQuantity, setCostFromProps,
+         amountRecount, incrementQuantity} from './action.js';
+
 
 class Item extends React.Component {
   constructor(props){
@@ -18,47 +20,74 @@ componentDidMount() {
 }
 
   render() {
+console.log(this.props.render[this.props.id-2]);
+
     return(
-      <div className='item'>
-        <div className='avatar'></div>
-        <div className='text-and-select'>
-          <h1>{ this.props.title }</h1>
-          <p>{this.props.description}</p>
-          <form action="/action_page.php" className='form'>
-            <select onChange={this.props.handleSelect} name="options" >
-              <option value="5">SKU1</option>
-              <option value="10">SKU2</option>
-              <option value="15">SKU3</option>
-              <option value="20">SKU4</option>
-            </select>
-          </form>
-        </div>
-        <div className='counter-wrapper'>
-          <div className='counter'>
-            <input type="button" onClick={ this.decrementQuantity } value='-' />
-              <p>{this.state.quantity}</p>
-            <input type="button" onClick={ this.incrementQuantity }  value='+' />
+      <div>
+        <div className='item'>
+          <div className='avatar'></div>
+          <div className='text-and-select'>
+            <h1>{ this.props.title }</h1>
+            <p>{ this.props.description }</p>
+            <form action="/action_page.php" className='form'>
+              <select onChange={ this.props.handleSelect } defaultValue={ this.props.selected } name="options" >
+                <option value="5"> SKU1</option>
+                <option value="10">SKU2</option>
+                <option value="15">SKU3</option>
+                <option value="20">SKU4</option>
+              </select>
+            </form>
+          </div>
+          <div className='counter-wrapper'>
+            <div className='counter'>
+              <input type="button" onClick={ this.props.handleDecrementQuantity } value='-' />
+                <p>{ this.props.quantity }</p>
+              <input type="button" onClick={ this.props.handleIncrementQuantity }  value='+' />
+            </div>
+          </div>
+          <div className='remove-wrapper'>
+            <div className='remove'>
+            </div>
+            <div className='amount'>
+              <p>{ this.props.id }</p>
+              {/* { +this.props.cost * this.props.quantity + +this.props.selected } */}
+            </div>
           </div>
         </div>
-        <div className='remove-wrapper'>
-          <div className='remove'>
-          </div>
-          <div className='amount'>
-            <p>{ +this.props.cost + +this.props.selected }</p>
-          </div>
-        </div>
+        <hr/>
       </div>
     )
   }
+  // componentDidMount() {
+  //   console.log(this.props.children)
+  // }
 }
 
 const mapStateToProps = state => ({
-	selected: state.item.selected
+	selected: state.item.selected,
+  quantity: state.item.quantity,
+  amount:   state.item.amount,
+  render:   state.addItem.render,
+  id:       state.addItem.id
 });
 
 const mapDispatchToProps = dispatch => ({
   handleSelect(event) {
-    dispatch(setSelect(event.target.value))
+    dispatch(setSelect(event.target.value));
+    dispatch(amountRecount());
+  },
+  handleIncrementQuantity(event) {
+    dispatch(incrementQuantity());
+    dispatch(amountRecount());
+
+  },
+  handleDecrementQuantity(event) {
+    dispatch(decrementQuantity());
+    dispatch(amountRecount());
+
+  },
+  handleCostFromProps(c) {
+    dispatch(setCostFromProps(c));
   }
 })
 

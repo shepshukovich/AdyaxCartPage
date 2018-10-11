@@ -14,7 +14,7 @@ class AddItem extends React.Component {
   render() {
     const tooltipTitleStyle       = { opacity: this.props.hoverTitle ? 1 : 0        };
     const tooltipDescriptionStyle = { opacity: this.props.hoverDescription ? 1 : 0  };
-    const tooltipCostStyle        = {  opacity: this.props.hoverCost ? 1 : 0        };
+    const tooltipCostStyle        = { opacity: this.props.hoverCost ? 1 : 0         };
 
     return(
         <form onSubmit={ this.props.handleFormSubmit } className='addItem'>
@@ -57,6 +57,9 @@ class AddItem extends React.Component {
         </form>
     );
   }
+  // componentDidMount() {
+  //   console.log(this.props.children)
+  // }
 }
 
 const mapStateToProps = state => ({
@@ -80,7 +83,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setCost(event.target.value));
   },
   handleRender(event) {
-    dispatch(setRenderSequence( event.target.value ));
+    dispatch(setRenderSequence());
     dispatch(setTitle(''));
     dispatch(setDescription(''));
     dispatch(setCost(''));

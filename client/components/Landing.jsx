@@ -54,7 +54,8 @@ const mapStateToProps = state => ({
   description: state.addItem.description,
   cost:        state.addItem.cost,
   render:      state.addItem.render,
-  selected:    state.item.selected
+  selected:    state.item.selected,
+  amount:      state.item.amount
 });
 
 export default connect( mapStateToProps)( Cart );

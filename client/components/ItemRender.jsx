@@ -11,12 +11,12 @@ class ItemRender extends React.Component {
   }
 
   render() {
+
     return(
       <React.Fragment>
         { this.props.render.length ?
             ( <div>
-              { this.props.render.map(item => <Item key={item.id} {...item} />) }
-              <hr />
+              { this.props.render.map(item => <Item key={item.id} {...item} {...this.props}/> ) }
               </div>
             ) :
             ( <h1>Please add item using form above</h1> )
@@ -24,6 +24,9 @@ class ItemRender extends React.Component {
       </React.Fragment>
     );
   }
+  // componentDidMount() {
+  //   console.log(this.props.children)
+  // }
 }
 
 export default ItemRender;

@@ -5,15 +5,16 @@ const defaultState = {
 	description: 'Default description',
 	cost: 25,
 	render: [],
-	id: 1,
+	id: 0,
 	hoverTitle: false,
 	hoverDescription: false,
-	hoverCost: false
+	hoverCost: false,
+	quantity: 0
 };
 
 export const {setTitle, setDescription, setCost, setRenderSequence,
 							remTitle, remDescription, remCost, remRenderSequence,
-						 	setHoverTitle, setHoverDescription, setHoverCost} = createActions({
+						 	setHoverTitle, setHoverDescription, setHoverCost, incrementQuantity} = createActions({
 	"SET_TITLE": (title) => ({ title: title }),
 	"SET_DESCRIPTION": (description) => ({ description: description }),
 	"SET_COST": (cost) => ({ cost: cost }),
@@ -25,10 +26,14 @@ export const {setTitle, setDescription, setCost, setRenderSequence,
 	"REM_TITLE": (title) => ({ title: title }),
 	"REM_DESCRIPTION": (description) => ({ description: '' }),
 	"REM_COST": (cost) => ({ cost: '' }),
-	"REM_RENDER_SEQUENCE": (render) => ({ newItem: '' })
+	"REM_RENDER_SEQUENCE": (render) => ({ newItem: '' }),
+	"INCREMENT_QUANTITY": () => ({})
 });
 
 export const addItemReducer = handleActions({
+	[incrementQuantity] (state, {payload: {}}) {
+		return { ...state, quantity: state.quantity + 1 }
+	},
 	[setTitle] (state, {payload: {title}}) {
 		return { ...state, title: title };
 	},
@@ -40,15 +45,16 @@ export const addItemReducer = handleActions({
 	},
 
 	[setRenderSequence] (state, {payload: {newItem}}) {
+
 		let id = state.id;
 		let id2 = id + 1;
-		state.id = id2;
 
+		state.id = id2;
 		newItem.title = state.title;
 		newItem.description = state.description;
 		newItem.cost = state.cost;
 		newItem.id = state.id;
-
+		newItem.quantity = state.quantity
 
 		let itemArray = state.render;
 		itemArray.push(newItem);
